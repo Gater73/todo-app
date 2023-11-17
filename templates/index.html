@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <style>
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Todo App</h1>
+            <form method="POST" action="/add">
+                <div class="field has-addons">
+                    <div class="control">
+                        <input class="input" type="text" name="todoitem" placeholder="Add a new task">
+                    </div>
+                    <div class="control">
+                        <input class="button is-primary" type="submit" value="Add">
+                    </div>
+                </div>
+            </form>
+            <h2 class="subtitle">Incomplete Tasks</h2>
+            <ul>
+                {% for task in incomplete %}
+                <li>
+                    <div class="box">
+                        {{ task.text }}
+                        <a class="button is-success is-small" href="/complete/{{ task.id }}">Mark as Complete</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <h2 class="subtitle">Complete Tasks</h2>
+            <ul>
+                {% for task in complete %}
+                <li>
+                    <div class="box">
+                        {{ task.text }}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <form method="POST" action="/clear">
+                <input class="button is-danger" type="submit" value="Clear Completed Tasks">
+            </form>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>Todo App</strong> by <a href="https://github.com/Gater73">Gater73</a>. The source code is licensed
+                <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPLv3</a>. The website content
+                is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
